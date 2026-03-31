@@ -117,7 +117,7 @@ for entry in "${exercises[@]}"; do
         if [ "$(uname -s)" = "Darwin" ]; then
             echo -e "${YELLOW}SKIP (macOS)${NC}"
             ((SKIP += 1))
-        elif cargo test -p "$package" --target "$RISCV64_TARGET" --quiet -- --nocapture 2>/dev/null; then
+        elif cargo test -p "$package" --lib --target "$RISCV64_TARGET" --quiet -- --nocapture 2>/dev/null; then
             echo -e "${GREEN}PASS${NC}"
             ((PASS += 1))
         else
@@ -125,7 +125,7 @@ for entry in "${exercises[@]}"; do
             ((FAIL += 1))
         fi
     else
-        if cargo test -p "$package" --quiet 2>/dev/null; then
+        if cargo test -p "$package" --lib --quiet 2>/dev/null; then
             echo -e "${GREEN}PASS${NC}"
             ((PASS += 1))
         else
